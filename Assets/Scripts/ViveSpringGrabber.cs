@@ -9,11 +9,14 @@ public class ViveSpringGrabber : Grabber
 {
     public string grabAction = "GrabPinch";
     private SpringJoint joint;
+    public GameObject chestTop;
+    private HingeJoint hJoint;
     
     new void Start ()
     {
         base.Start();
         joint = GetComponent<SpringJoint>();
+        hJoint = chestTop.GetComponent<HingeJoint>();
     }
 	
 	protected override void Update ()
@@ -26,5 +29,12 @@ public class ViveSpringGrabber : Grabber
         {
             joint.connectedBody = null;
         }
+        if (joint.connectedBody != null)
+        {
+            float duration = 0.2f;
+            float strength = 0.75f;
+            SteamVR_Actions.default_Haptic[controller.inputSource].Execute(0, duration, -hJoint.angle *10, strength);
+        }
+
     }
 }
