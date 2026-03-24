@@ -22,9 +22,11 @@ public class Shooting : MonoBehaviour
 
     protected virtual void FireHapticFeedback(bool hasAmmo)
     {
-        //
-        // YOUR HAPTIC FEEDBACK CODE GOES HERE
-        //
+        float duration = 0.2f;
+        int frequency = 20;
+        float strength = 0.75f;
+
+        SteamVR_Actions.default_Haptic[controller.inputSource].Execute(0, duration, frequency, strength);
     }
     
     void Start ()
